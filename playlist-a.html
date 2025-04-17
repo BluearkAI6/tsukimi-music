@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Tsukimi Music Playlist</title>
+</head>
+<body>
+  <h2>🎧 Now Playing: <span id="nowPlaying">-</span></h2>
+  <audio id="audioPlayer" controls autoplay></audio>
+
+  <script>
+    const playlist = [
+      { title: "If I Could Be A Constellation", file: "lifcouldbeaconstellation.mp3" },
+      { title: "Ame wo Matsu", file: "amewomatsu.mp3" },
+      { title: "bre@th", file: "bre@th.mp3" },
+      { title: "Bright Burning Shout", file: "brightburningshout.mp3" },
+      { title: "Crying for Rain", file: "cryingforrain.mp3" },
+      { title: "Higanbana", file: "higanbana.mp3" },
+      { title: "In The Cage", file: "inthecage.mp3" },
+      { title: "Oath Sign", file: "oathsign.mp3" },
+      { title: "Tsukimori", file: "tsukimori.mp3" },
+      { title: "Zero", file: "zero.mp3" }
+    ];
+
+    const audio = document.getElementById('audioPlayer');
+    const nowPlaying = document.getElementById('nowPlaying');
+    let currentIndex = 0;
+
+    function loadTrack(index) {
+      const track = playlist[index];
+      nowPlaying.textContent = track.title;
+      audio.src = track.file;
+      audio.play();
+    }
+
+    audio.addEventListener('ended', () => {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      loadTrack(currentIndex);
+    });
+
+    // 初始化第一首
+    loadTrack(currentIndex);
+  </script>
+</body>
+</html>
